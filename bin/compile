@@ -55,7 +55,7 @@ if [ $MAVEN_VERSION == "M2" ]; then
     echo " done"
   fi
   MAVEN_SETTINGS_URL="http://dl.dropbox.com/u/17677610/heroku/heroku-buildpack-java/settings.xml"
-elif
+else
   if [ ! -d .maven ]; then
     echo -n "-----> Installing Maven 3.0.1..."
     curl --silent --max-time 60 --location $MAVEN3_URL | tar xz
