@@ -65,7 +65,7 @@ else
   
 fi
 
-if [ $MAVEN_REPO == "true" ]; then
+if [ "$MAVEN_REPOx" == "truex" ]; then
   MAVEN_SETTINGS_URL="http://dl.dropbox.com/u/17677610/heroku/heroku-buildpack-java/settings.xml"
 else
   MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
