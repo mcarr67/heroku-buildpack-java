@@ -44,16 +44,26 @@ install_java ${BUILD_DIR} ${javaVersion}
 echo "done"
 
 # install maven with base repository
-MAVEN_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/maven.tar.gz"
+MAVEN3_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/maven.tar.gz"
+MAVEN2_URL="http://dl.dropbox.com/u/17677610/heroku/heroku-buildpack-java/maven.tar.gz"
 
-if [ ! -d .maven ]; then
-  echo -n "-----> Installing Maven 3.0.3..."
-  curl --silent --max-time 60 --location $MAVEN_URL | tar xz
-  chmod +x .maven/bin/mvn
-  echo " done"
+if [ $MAVEN_VERSION == "M2" ]; then
+  if [ ! -d .maven ]; then
+    echo -n "-----> Installing Maven 2.2.1..."
+    curl --silent --max-time 60 --location $MAVEN2_URL | tar xz
+    chmod +x .maven/bin/mvn
+    echo " done"
+  fi
+  MAVEN_SETTINGS_URL="http://dl.dropbox.com/u/17677610/heroku/heroku-buildpack-java/settings.xml"
+elfi
+  if [ ! -d .maven ]; then
+    echo -n "-----> Installing Maven 3.0.1..."
+    curl --silent --max-time 60 --location $MAVEN3_URL | tar xz
+    chmod +x .maven/bin/mvn
+    echo " done"
+  fi
+  MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
 fi
-
-MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
 
 echo -n "-----> Installing settings.xml..."
 if [ -f .m2/settings.xml ]; then
