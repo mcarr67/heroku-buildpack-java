@@ -47,7 +47,7 @@ echo "done"
 MAVEN3_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/maven.tar.gz"
 MAVEN2_URL="http://dl.dropbox.com/u/17677610/heroku/heroku-buildpack-java/maven.tar.gz"
 
-if [ $MAVEN_VERSION == "M2" ]; then
+if [ "$MAVEN_VERSION" == "M2" ]; then
   if [ ! -d .maven ]; then
     echo -n "-----> Installing Maven 2.2.1..."
     curl --silent --max-time 60 --location $MAVEN2_URL | tar xz
